@@ -6,6 +6,7 @@ import { DifficultySelector } from "@/components/blockchain/difficulty-selector"
 import { LedgerView } from "@/components/blockchain/ledger-view";
 import { MiningControls } from "@/components/blockchain/mining-controls";
 import { ValidationIndicator } from "@/components/blockchain/validation-indicator";
+import { AUTO_MINE_MAX_COUNT } from "@/lib/constants/blockchain-config";
 import {
   autoMineBlocks,
   createInitialBlockchainState,
@@ -19,6 +20,7 @@ import type { Block, BlockchainState, ValidationProgress } from "@/types/blockch
 export function BlockchainBoard() {
   const [state, setState] = useState<BlockchainState | null>(null);
   const [inputData, setInputData] = useState<string>("Alice pays Bob 10");
+  const [autoMineCount, setAutoMineCount] = useState<number>(3);
   const [isMining, setIsMining] = useState<boolean>(false);
   const [isAutoMining, setIsAutoMining] = useState<boolean>(false);
   const [isValidating, setIsValidating] = useState<boolean>(false);
@@ -63,7 +65,7 @@ export function BlockchainBoard() {
     setIsAutoMining(true);
     const nextState: BlockchainState = await autoMineBlocks({
       state,
-      count: 3,
+      count: autoMineCount,
       dataPrefix: inputData || "Auto transaction",
       onBlockMined: (result) => {
         setMiningElapsedMs(result.elapsedMs);
@@ -93,6 +95,11 @@ export function BlockchainBoard() {
     if (!state || isBusy) return;
     await runValidationWithProgress(state);
   }
+  function handleAutoMineCountChange(value: number): void {
+    if (!Number.isFinite(value)) return;
+    const sanitizedValue: number = Math.max(1, Math.min(AUTO_MINE_MAX_COUNT, Math.trunc(value)));
+    setAutoMineCount(sanitizedValue);
+  }
   if (!state) {
     return (
       <div className="mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center p-6">
@@ -113,10 +120,12 @@ export function BlockchainBoard() {
       <div className="grid gap-4 lg:grid-cols-[1fr_auto]">
         <MiningControls
           value={inputData}
+          autoMineCount={autoMineCount}
           isMining={isMining}
           isAutoMining={isAutoMining}
           miningElapsedMs={miningElapsedMs}
           onChangeValue={setInputData}
+          onChangeAutoMineCount={handleAutoMineCountChange}
           onMine={() => {
             void handleMineBlock();
           }}

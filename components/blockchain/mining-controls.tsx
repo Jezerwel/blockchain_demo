@@ -4,10 +4,12 @@ import type { ChangeEvent } from "react";
 
 interface MiningControlsProps {
   readonly value: string;
+  readonly autoMineCount: number;
   readonly isMining: boolean;
   readonly isAutoMining: boolean;
   readonly miningElapsedMs: number;
   readonly onChangeValue: (value: string) => void;
+  readonly onChangeAutoMineCount: (value: number) => void;
   readonly onMine: () => void;
   readonly onAutoMine: () => void;
 }
@@ -28,6 +30,23 @@ export function MiningControls(props: MiningControlsProps) {
           props.onChangeValue(event.target.value)
         }
       />
+      <div className="flex items-center gap-3">
+        <label htmlFor="auto-mine-count" className="text-xs uppercase tracking-[0.2em] text-cyan-300">
+          Auto Mine Count
+        </label>
+        <input
+          id="auto-mine-count"
+          aria-label="Auto mine count input"
+          type="number"
+          min={1}
+          max={20}
+          className="w-24 rounded-md border border-cyan-400/60 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none ring-fuchsia-400 focus:ring-2"
+          value={props.autoMineCount}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            props.onChangeAutoMineCount(Number(event.target.value))
+          }
+        />
+      </div>
       <div className="flex flex-wrap items-center gap-3">
         <button
           type="button"
@@ -45,7 +64,7 @@ export function MiningControls(props: MiningControlsProps) {
           className="cursor-pointer rounded-md border border-cyan-300 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:bg-cyan-500/10 disabled:cursor-not-allowed disabled:opacity-50"
           onClick={props.onAutoMine}
         >
-          {props.isAutoMining ? "Auto Mining..." : "Auto Mine x3"}
+          {props.isAutoMining ? "Auto Mining..." : `Auto Mine x${props.autoMineCount}`}
         </button>
         <span className="text-xs text-cyan-200">
           Last mining time: <strong>{props.miningElapsedMs}ms</strong>
