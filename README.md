@@ -37,11 +37,10 @@ Open `http://localhost:3000`.
 If your project is plain HTML/JS, you can alternatively open `index.html`
 directly in the browser.
 
-## Screenshot or GIF of the App in Action
+## Screenshot of the App in Action
 
-Add a screenshot or GIF file to the repository and reference it here.
+<img width="1920" height="1600" alt="image" src="https://github.com/user-attachments/assets/1db76d17-328d-4607-8088-28bb8475b5ee" />
 
-![Blockchain Visualizer Demo](./public/blockchain-visualizer-demo.png)
 
 ## Test and Lint
 
