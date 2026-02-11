@@ -1,4 +1,6 @@
-# Blockchain Visualizer
+# Project Title and Description
+
+## Blockchain Visualizer
 
 An interactive web application that demonstrates how blockchain works through a
 dark neon coder interface. Users can view block links, mine proof-of-work
@@ -23,7 +25,7 @@ blocks, tamper with block data, and watch real-time validation detect failures.
 - Zod for runtime validation
 - Vitest + Testing Library + Playwright
 
-## Run Locally
+## How to Run Locally
 
 ```bash
 npm install
@@ -31,6 +33,15 @@ npm run dev
 ```
 
 Open `http://localhost:3000`.
+
+If your project is plain HTML/JS, you can alternatively open `index.html`
+directly in the browser.
+
+## Screenshot or GIF of the App in Action
+
+Add a screenshot or GIF file to the repository and reference it here.
+
+![Blockchain Visualizer Demo](./public/blockchain-visualizer-demo.png)
 
 ## Test and Lint
 
