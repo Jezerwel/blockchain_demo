@@ -1,0 +1,11 @@
+export const GENESIS_PREVIOUS_HASH: string = "0";
+export const HASH_PREVIEW_LENGTH: number = 10;
+export const MIN_DIFFICULTY: number = 1;
+export const MAX_DIFFICULTY: number = 4;
+export const DEFAULT_DIFFICULTY: number = 2;
+export const MAX_DATA_LENGTH: number = 500;
+export const MINING_PROGRESS_INTERVAL: number = 500;
+export const VALIDATION_PROGRESS_DELAY_MS: number = 80;
+export const PERFORMANCE_ACTION_BUDGET_MS: number = 100;
+export const PERFORMANCE_MINING_BUDGET_MS: number = 10000;
+export const AUTO_MINE_MAX_COUNT: number = 20;
